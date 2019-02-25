@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import javax.xml.registry.infomodel.User;
 
 @Model
 public class Index {
@@ -11,13 +12,15 @@ public class Index {
     @Inject
     HelloService helloService;
 
-
+    @Inject
+    EmptyDelegate emptyDelegate;
 
     @Inject
     GlobalCounter globalCounter;
 
     @Inject
     UserCounter userCounter;
+
 
     @PostConstruct
     public void onInit() {
@@ -34,13 +37,13 @@ public class Index {
     }
 
     public int getGlobalCounter() {
-        globalCounter.increase();
-        return globalCounter.getValue();
+        emptyDelegate.getGc().increase();
+        return emptyDelegate.getGc().getValue();
     }
 
     public int getUserCounter() {
-        userCounter.increase();
-        return userCounter.getValue();
+        emptyDelegate.getUc().increase();
+        return emptyDelegate.getUc().getValue();
     }
 
 }
