@@ -15,12 +15,9 @@ public class Index {
     @Inject
     EmptyDelegate emptyDelegate;
 
-    @Inject
-    GlobalCounter globalCounter;
 
     @Inject
-    UserCounter userCounter;
-
+    NakedObject nakedObject;
 
     @PostConstruct
     public void onInit() {
@@ -37,6 +34,7 @@ public class Index {
     }
 
     public int getGlobalCounter() {
+        nakedObject.sayHello();
         emptyDelegate.getGc().increase();
         return emptyDelegate.getGc().getValue();
     }
