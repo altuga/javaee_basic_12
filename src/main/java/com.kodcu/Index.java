@@ -19,6 +19,9 @@ public class Index {
     @Inject
     NakedObject nakedObject;
 
+    @Inject
+    VeryBigBrother veryBigBrother;
+
     @PostConstruct
     public void onInit() {
         System.out.println(" Created Index ");
@@ -30,7 +33,10 @@ public class Index {
     }
 
     public String getMessage() {
-        return  helloService.sayHello() + " - hashcode : " + this.hashCode() + " " + this.toString();
+        String message = helloService.sayHello();
+
+        veryBigBrother.gatherEverything(message);
+        return  message + " - hashcode : " + this.hashCode() + " " + this.toString();
     }
 
     public int getGlobalCounter() {
