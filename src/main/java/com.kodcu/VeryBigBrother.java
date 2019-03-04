@@ -50,7 +50,7 @@ public class VeryBigBrother {
         System.out.println("Analyzing at : " + new Date());
         List<Future<Boolean>> results = new ArrayList<>();
         for (String message : messageQueue) {
-           results.add(messageAnalyzer.analyze(message));
+           results.add(messageAnalyzer.analyze(message)); // spend 5 secs with async
            this.messageQueue.remove(message);
         }
 

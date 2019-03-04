@@ -10,11 +10,12 @@ import java.util.logging.Logger;
 @Stateless
 public class MessageAnalyzer {
 
+
     @Asynchronous
     public Future<Boolean> analyze(String message) {
         boolean retVal = (message.hashCode() % 2 == 0) ;
         try {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             Logger.getLogger(MessageAnalyzer.class.getName()).log(Level.SEVERE, null, e);
         }
