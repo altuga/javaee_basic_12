@@ -29,6 +29,9 @@ public class VeryBigBrother {
     @Inject
     MessageAnalyzer messageAnalyzer;
 
+    @Inject
+    MessageArchiver messageArchiver;
+
     @PostConstruct
     public void initialize() {
         this.messageQueue = new CopyOnWriteArrayList<>();
@@ -41,6 +44,7 @@ public class VeryBigBrother {
 
   public void gatherEverything(String message) {
         this.messageQueue.add(message);
+         messageArchiver.save(message);
   }
 
 
