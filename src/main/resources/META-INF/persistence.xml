@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="DiWithServerPU" transaction-type="JTA">
+        <jta-data-source>jdbc/sample</jta-data-source>
+        <properties>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="openjpa.jdbc.SynchronizeMappings"
+                      value="buildSchema" />
+            <property name="eclipselink.logging.level.sql" value="FINE" />
+            <property name="eclipselink.logging.parameters" value="true" />
+            <property name="hibernate.show_sql" value="true" />
+        </properties>
+
+    </persistence-unit>
+</persistence>

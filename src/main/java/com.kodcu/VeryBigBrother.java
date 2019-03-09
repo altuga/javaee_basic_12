@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.*;
 import javax.enterprise.concurrent.ManagedExecutorService;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +33,12 @@ public class VeryBigBrother {
     @Inject
     MessageArchiver messageArchiver;
 
+    @Inject
+    Event<String> events;
+
+    @Resource
+    SessionContext sessionContext;
+
     @PostConstruct
     public void initialize() {
         this.messageQueue = new CopyOnWriteArrayList<>();
@@ -41,12 +48,16 @@ public class VeryBigBrother {
 
     }
 
+  //  txProxy.begin
 
   public void gatherEverything(String message) {
         this.messageQueue.add(message);
          messageArchiver.save(message);
+         this.events.fire(message);
+         sessionContext.setRollbackOnly();
   }
 
+    //  txProxy.commit
 
     @Timeout
     public void batchAnalyze() {
