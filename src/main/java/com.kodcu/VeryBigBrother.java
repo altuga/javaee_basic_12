@@ -54,7 +54,7 @@ public class VeryBigBrother {
         this.messageQueue.add(message);
          messageArchiver.save(message);
          this.events.fire(message);
-         sessionContext.setRollbackOnly();
+         //sessionContext.setRollbackOnly();
   }
 
     //  txProxy.commit
